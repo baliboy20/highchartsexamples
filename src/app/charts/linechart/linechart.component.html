@@ -1,0 +1,30 @@
+<div class="charts-container">
+
+  <div class="charts-row">
+    <div class="charts-row">
+     <fieldset name="gtype" (change)="optionChanged($event.target.value)">
+       <ng-container *ngFor="let c of ['linechart','barchart','plotchart']">
+         <span>{{c}}</span>
+         <input type="radio" [value]="c" name="gtype">
+       </ng-container>
+
+     </fieldset>
+    </div>
+    <div class="charts-row" style="justify-content: flex-start">
+      <a href="https://stackblitz.com/edit/angular-cjah4p?file=app%2Fapp.component.ts">
+        Stackblitz Demo</a>
+    </div>
+    <div [chart]="chart" style="height: 70vh"></div>
+  </div>
+  <div class="charts-row">
+    <button (click)="add()">Add Point!</button>
+  </div>
+  <div class="charts-row">
+    <div style="background-color: whitesmoke;
+    margin: 10px -10px;
+    min-width: 100%;
+    min-height: 40px"></div>
+  </div>
+
+</div>
+
