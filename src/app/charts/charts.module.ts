@@ -5,20 +5,25 @@ import {RouterModule} from '@angular/router';
 import {ChartModule} from 'angular-highcharts';
 import {ChartConfigService} from './chart.config.service';
 import {LinechartComponent} from './linechart/linechart.component';
-import {HttpClient} from '@angular/common/http';
+import {HttpClientModule} from '@angular/common/http';
+import {HttpModule} from '@angular/http';
+import { TimeseriesChartComponent } from './timeseries-chart/timeseries-chart.component';
+import {TimeseriesService} from './services/data/timeseries.service';
+
 
 @NgModule({
     imports: [
         CommonModule,
         ChartModule,
-        RouterModule.forChild([{path: 'charts', component: ChartsComponent}])
+        RouterModule.forChild([{path: 'charts', component: ChartsComponent}]),
+        HttpModule,HttpClientModule,
     ],
     declarations: [
         ChartsComponent,
         LinechartComponent,
-        HttpClient,
-    ],
-    providers: [ChartConfigService]
+        TimeseriesChartComponent,
+       ],
+    providers: [ChartConfigService, TimeseriesService]
 })
 export class ChartsModule {
 }

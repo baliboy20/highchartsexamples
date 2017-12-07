@@ -3,7 +3,7 @@
   <div class="charts-row">
     <div class="charts-row">
      <fieldset name="gtype" (change)="optionChanged($event.target.value)">
-       <ng-container *ngFor="let c of ['linechart','barchart','plotchart']">
+       <ng-container *ngFor="let c of ['linechart','barchart','plotchart', 'time series']">
          <span>{{c}}</span>
          <input type="radio" [value]="c" name="gtype">
        </ng-container>

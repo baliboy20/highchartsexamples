@@ -1,5 +1,7 @@
 import {Inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import * as Highcharts from 'highcharts';
+import {Timeseries} from './services/data/timeseries.service';
 
 @Injectable()
 export class ChartConfigService {
@@ -9,10 +11,10 @@ export class ChartConfigService {
         plotchart: this.getPlotChart(),
     };
 
-    constructor(@Inject('HttpClient') private  http: HttpClient) {
-        const url = "";
-        this.http.get(url).subscribe(console.log);
-    }
+    // constructor(@Inject('HttpClient') private  http: HttpClient) {
+    //     const url = "";
+    //     this.http.get(url).subscribe(console.log);
+    // }
 
     getBarOPtions() {
         return {
@@ -93,7 +95,71 @@ export class ChartConfigService {
         };
     }
 
-    getCandlestickData() {
+    getTimeseriesLineOtions(d: Timeseries, d1: Timeseries) {
+
+        return {
+            chart: {
+                zoomType: 'x',
+                type: 'line'
+            },
+            title: {
+                text: 'USD to EUR exchange rate over time'
+            },
+            subtitle: {
+                text: document.ontouchstart === undefined ?
+                    'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in'
+            },
+            xAxis: {
+                type: 'datetime',
+                title: 'Huffington Post'
+            },
+            yAxis: {
+                title: {
+                    text: 'Exchange rate'
+                }
+            },
+            legend: {
+                enabled: true
+            },
+            plotOptions: {
+                area: {
+                    fillColor: {
+                        linearGradient: {
+                            x1: 0,
+                            y1: 0,
+                            x2: 0,
+                            y2: 1
+                        },
+                        stops: [
+                            [0, Highcharts.getOptions().colors[1]],
+                            [1, Highcharts.Color(Highcharts.getOptions().colors[1]).setOpacity(0).get('rgba')]
+                        ]
+                    },
+                    marker: {
+                        radius: 8
+                    },
+                    lineWidth: 1,
+                    states: {
+                        hover: {
+                            lineWidth: 1
+                        }
+                    },
+                    threshold: null
+                }
+            },
+
+            series: [{
+                type: 'area',
+                name: 'USD to EUR',
+                data: d
+            },
+                {
+                    type: 'area',
+                    name: 'USD to ZZZ',
+                    data: d1
+                }
+            ]
+        };
 
     }
 
